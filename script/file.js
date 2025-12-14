@@ -35,6 +35,12 @@ for(let cate of categories){
                     cartContainer.append(div)
 }
     }
+    const loadRandomData =()=>{
+        const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`
+        fetch(url)
+        .then((res)=>res.json())
+        .then((data) => displayFoods(data.foods))
+    }
 const displayFoods =(foods)=>{
     //console.log(foods)
     const foodContainer = document.getElementById("food-container")
@@ -66,3 +72,4 @@ foodContainer.append(foodCard)
     };
 
 loadCatagory()
+loadRandomData()
