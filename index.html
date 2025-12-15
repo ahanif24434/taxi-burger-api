@@ -56,22 +56,7 @@ referrerpolicy="no-referrer"/>
             <div class="divider"></div>
             <div class="grid grid-cols-1 gap-5" id="food-container">
 <!--simple card-->
-<div class="bg-white rounded-xl flex gap-3 shadow-xl p-3">
-    <div class="img flex-1">
-        <!--src=-->
-<img src="https://www.themealdb.com/images/media/meals/1520081754.jpg" alt="" class="w-[160px] h-[160px] rounded-xl object-cover">
-    </div>
-<div class="flex-2">
-    <h1 class="font-bold text-xl">Roast fennel and aubergine paella</h1>
-    <div class="badge badge-warning">vegan</div>
-    <div class="divider divider-end">
-        <h2 class="font-semibold text-yellow-600">$<span class="price">560</span>BDT</h2>
-    </div>
-<button class="btn btn-warning">
-<i class="fa-regular fa-square-plus"></i> Add this item
-</button>
-</div>
-</div>
+
  </div>
         </section>
         <section class="col-span-3 border-[#FEBF00] border-2">
@@ -98,6 +83,17 @@ referrerpolicy="no-referrer"/>
 </div>
         </section>
     </section>
+    <!-- You can open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_3.showModal()">open modal</button>
+<dialog id="my_modal_3" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or click on ✕ button to close</p>
+  </div>
+</dialog>
     <script src="./script/file.js">
 
     </script>

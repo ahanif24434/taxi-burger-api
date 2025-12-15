@@ -35,12 +35,20 @@ for(let cate of categories){
                     cartContainer.append(div)
 }
     }
+    const loadFoodsDetails =(id)=>{
+        const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`;
+        //console.log(url);
+        fetch(url)
+        .then(res =>res.json())
+        .then(data => console.log(data.details))
+    }
     const loadRandomData =()=>{
-        const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`
+        const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
         fetch(url)
         .then((res)=>res.json())
         .then((data) => displayFoods(data.foods))
     }
+    
 const displayFoods =(foods)=>{
     //console.log(foods)
     const foodContainer = document.getElementById("food-container")
@@ -48,9 +56,8 @@ const displayFoods =(foods)=>{
     foods.forEach((food)=>{
 //console.log(food);
 const foodCard = document.createElement('div')
-foodCard.innerHTML =`<div class="bg-white rounded-xl flex gap-3 shadow-xl p-3">
+foodCard.innerHTML =`<div onclick="loadFoodsDetails(${food.id})" class="bg-white rounded-xl flex gap-3 shadow-xl p-3">
     <div class="img flex-1">
-        <!--src=-->
         
 <img src="${food.foodImg}" 
 alt="" class="w-[160px] h-[160px] rounded-xl object-cover">
