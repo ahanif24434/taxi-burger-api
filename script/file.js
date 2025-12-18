@@ -1,4 +1,4 @@
-const loadCatagory =() =>{
+const loadCatagory =() =>{//1
     const url ="https://taxi-kitchen-api.vercel.app/api/v1/categories";
     fetch(url)
     .then(response => response.json())
@@ -12,7 +12,7 @@ const loadCatagory =() =>{
 //       "price": 569,
 //       "category": "Chicken"
 //     },
-const loadFood =(id)=>{
+const loadFood =(id)=>{  //2
 //console.log("load food called", id)
 const url = `https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`;
 //console.log(url)
@@ -23,7 +23,7 @@ fetch(url)
 }
 
 
-    const displayCategory = (categories) =>{
+    const displayCategory = (categories) =>{ //1
         const cartContainer = document.getElementById("cate-Container")
 cartContainer.innerHTML = "";
 for(let cate of categories){
@@ -35,21 +35,23 @@ for(let cate of categories){
                     cartContainer.append(div)
 }
     }
+
+    
     const loadFoodsDetails =(id)=>{
         const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/${id}`;
         //console.log(url);
         fetch(url)
         .then(res =>res.json())
-        .then(data => console.log(data.details))
+        .then(data => displayDetails(data.details))
     }
-    const loadRandomData =()=>{
+    const loadRandomData =()=>{ //3
         const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
         fetch(url)
         .then((res)=>res.json())
         .then((data) => displayFoods(data.foods))
     }
     
-const displayFoods =(foods)=>{
+const displayFoods =(foods)=>{ //2 +3
     //console.log(foods)
     const foodContainer = document.getElementById("food-container")
     foodContainer.innerHTML = "";
@@ -77,6 +79,33 @@ foodContainer.append(foodCard)
     })
         
     };
+
+//   "details": {
+//     "id": 52794,
+//     "title": "Vegan Chocolate Cake",
+//     "catId": 11,
+//     "foodImg": "https://www.themealdb.com/images/media/meals/qxutws1486978099.jpg",
+//     "price": 695,
+//     "video": "https://www.youtube.com/watch?v=C3pAgB7pync",
+//     "category": "Vegan",
+//     "area": "American"
+    const displayDetails = (food)=>{
+        // console.log(food)
+        const detailsContainer = document.getElementById("details-container")
+        detailsContainer.innerHTML =`
+        <div class="">
+        <h2 class="text-xl font-bold">${food.title}</h2>
+        </div>
+        <div class="">
+        <img src="${food.foodImg}" alt=""/>
+    </div>
+     <div class= "badge badge-primary"> 
+     ${food.area}
+     </div>
+    <a href="${food.video}"class="btn btn-warning" alt="" target="_blank">watch video</a>
+     `;
+    document.getElementById("my_modal_3").showModal()
+    }
 
 loadCatagory()
 loadRandomData()
