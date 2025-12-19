@@ -13,6 +13,8 @@ const loadCatagory =() =>{//1
 //       "category": "Chicken"
 //     },
 const loadFood =(id)=>{  //2
+    document.getElementById("food-container").classList.add("hidden")
+    document.getElementById("loading-spinner").classList.remove("hidden")
 //console.log("load food called", id)
 const url = id
 ?`https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`
@@ -92,8 +94,10 @@ alt="" class="w-[160px] h-[160px] rounded-xl object-cover">
 </div>
 </div> `
 foodContainer.append(foodCard)
+
     })
-        
+     document.getElementById("food-container").classList.remove("hidden")
+    document.getElementById("loading-spinner").classList.add("hidden")   
     };
 
 //   "details": {
