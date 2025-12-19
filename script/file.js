@@ -14,7 +14,23 @@ const loadCatagory =() =>{//1
 //     },
 const loadFood =(id)=>{  //2
 //console.log("load food called", id)
-const url = `https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`;
+const url = id
+?`https://taxi-kitchen-api.vercel.app/api/v1/categories/${id}`
+:`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
+
+const catBtns = document.querySelectorAll(".btn-category");
+// console.log(catBtns)
+catBtns.forEach(btn =>btn.classList.remove("active"))
+if(id){
+const currentBtn =document.getElementById(`cat-btn-${id}`);
+if(currentBtn){
+currentBtn.classList.add("active");
+}
+
+
+}
+// console.log(currentBtn)
+
 //console.log(url)
 fetch(url)
 .then(res => res.json())
@@ -29,7 +45,7 @@ cartContainer.innerHTML = "";
 for(let cate of categories){
     const div = document.createElement('div')
     div.innerHTML = `<div>
-    <button onclick ="loadFood(${cate.id})" class="btn btn-block shadow btn-category">
+    <button id="cat-btn-${cate.id}" onclick ="loadFood(${cate.id})" class="btn btn-block shadow btn-category">
                     <img src="${cate.categoryImg}" alt="" class="w-10">
                     ${cate.categoryName}</button></div>`
                     cartContainer.append(div)
@@ -45,7 +61,7 @@ for(let cate of categories){
         .then(data => displayDetails(data.details))
     }
     const loadRandomData =()=>{ //3
-        const url =`https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
+        const url = `https://taxi-kitchen-api.vercel.app/api/v1/foods/random`;
         fetch(url)
         .then((res)=>res.json())
         .then((data) => displayFoods(data.foods))
@@ -108,4 +124,5 @@ foodContainer.append(foodCard)
     }
 
 loadCatagory()
-loadRandomData()
+loadFood(11)
+//  loadRandomData()
