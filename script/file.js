@@ -4,6 +4,8 @@ const loadCatagory =() =>{//1
     .then(response => response.json())
     .then(data => displayCategory(data.categories))
 }
+let card =[];
+let total = 0;
 // {
 //       "id": 52850,
 //       "title": "Chicken Couscous",
@@ -80,15 +82,15 @@ foodCard.innerHTML =`<div onclick="loadFoodsDetails(${food.id})" class="bg-white
     <div class="img flex-1">
         
 <img src="${food.foodImg}" 
-alt="" class="w-[160px] h-[160px] rounded-xl object-cover">
+alt="" class="w-[160px] h-[160px] food-img rounded-xl object-cover">
     </div>
 <div class="flex-2">
-    <h1 class="font-bold text-xl">${food.title}</h1>
+    <h1 class="font-bold text-xl food-title">${food.title}</h1>
     <div class="badge badge-warning">${food.category}</div>
     <div class="divider divider-end">
-        <h2 class="font-semibold text-yellow-600">$<span class="price">${food.price}</span>BDT</h2>
+        <h2 class="font-semibold text-yellow-600">$<span class="food-price">${food.price}</span>BDT</h2>
     </div>
-<button class="btn btn-warning">
+<button onclick="addtoCard(this)" class="btn btn-warning">
 <i class="fa-regular fa-square-plus"></i> Add this item
 </button>
 </div>
@@ -130,3 +132,21 @@ foodContainer.append(foodCard)
 loadCatagory()
 loadFood(11)
 //  loadRandomData()
+const addtoCard =(btn)=>{
+    // console.log("add to card button click",btn)
+    const card = btn.parentNode.parentNode;
+    // console.log(card)
+    const foodTitle = card.querySelector(".food-title").innerText;
+    const foodImg = card.querySelector(".food-img").src;
+    const foodPrice = card.querySelector(".food-price").innerText;
+    const foodPriceNum = Number(foodPrice);
+    console.log(foodTitle, foodImg, foodPriceNum);
+
+    const selectedItem = {
+    foodTitle :foodTitle,
+    foodImg : foodImg,
+    foodPrice : foodPriceNum,
+};
+card.push(selectedItem);
+console.log(card)
+}
