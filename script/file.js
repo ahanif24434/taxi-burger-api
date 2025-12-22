@@ -78,11 +78,13 @@ const displayFoods =(foods)=>{ //2 +3
     foods.forEach((food)=>{
 //console.log(food);
 const foodCard = document.createElement('div')
-foodCard.innerHTML =`<div onclick="loadFoodsDetails(${food.id})" class="bg-white rounded-xl flex gap-3 shadow-xl p-3">
+foodCard.innerHTML =`<div  class="bg-white rounded-xl flex gap-3 shadow-xl p-3">
     <div class="img flex-1">
         
 <img src="${food.foodImg}" 
-alt="" class="w-[160px] h-[160px] food-img rounded-xl object-cover">
+alt="" onclick="loadFoodsDetails(${food.id})"
+class="w-[160px] h-[160px] food-img rounded-xl object-cover">
+
     </div>
 <div class="flex-2">
     <h1 class="font-bold text-xl food-title">${food.title}</h1>
@@ -133,20 +135,50 @@ loadCatagory()
 loadFood(11)
 //  loadRandomData()
 const addtoCard =(btn)=>{
+    // event.stopImmediatePropagation()
     // console.log("add to card button click",btn)
-    const card = btn.parentNode.parentNode;
+    const cardItem = btn.parentNode.parentNode;
     // console.log(card)
-    const foodTitle = card.querySelector(".food-title").innerText;
-    const foodImg = card.querySelector(".food-img").src;
-    const foodPrice = card.querySelector(".food-price").innerText;
+    const foodTitle = cardItem.querySelector(".food-title").innerText;
+    const foodImg = cardItem.querySelector(".food-img").src;
+    const foodPrice = cardItem.querySelector(".food-price").innerText;
     const foodPriceNum = Number(foodPrice);
     console.log(foodTitle, foodImg, foodPriceNum);
 
     const selectedItem = {
-    foodTitle :foodTitle,
-    foodImg : foodImg,
-    foodPrice : foodPriceNum,
+    foodTitle:foodTitle,
+    foodImg:foodImg,
+    foodPrice:foodPriceNum,
 };
 card.push(selectedItem);
-console.log(card)
+total = total + foodPriceNum;
+displayCart(card)
+displayTotal(total)
+}
+const displayTotal =(val) =>{
+ document.getElementById("cart-total").innerHTML=val;   
+}
+const displayCart = (card) =>{
+ const cartContainer = document.getElementById("cart-container")
+cartContainer.innerHTML = "";
+for(let item of card){
+    const newCart = document.createElement("div")
+    newCart.innerHTML =`
+    <div class="bg-white rounded-xl flex gap-2 p-1 shadow relative">
+    <div class="img">
+<img src="${item.foodImg}" alt="" class="w-[50px] h-[50px] rounded-xl object-cover">
+    </div>
+    <div class="flex-1">
+<h1 class="text-xl font-bold rounded-lg">Roast fennel and aubergine paella</h1>
+<div>
+    <h2 class="text-yellow-600 font-semibold mt-2">$ <span class="price">560</span>BDT</h2>
+    </div>
+    </div>
+    <div class="w-6 h-6 bg-red-500 flex items-center justify-center rounded-full absolute -top-1 -right-1">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+</div>
+    `
+    cartContainer.append(newCart)
+} 
 }
