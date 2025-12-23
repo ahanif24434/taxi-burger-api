@@ -143,7 +143,7 @@ const addtoCard =(btn)=>{
     const foodImg = cardItem.querySelector(".food-img").src;
     const foodPrice = cardItem.querySelector(".food-price").innerText;
     const foodPriceNum = Number(foodPrice);
-    console.log(foodTitle, foodImg, foodPriceNum);
+    // console.log(foodTitle, foodImg, foodPriceNum);
 
     const selectedItem = {
     foodTitle:foodTitle,
@@ -151,6 +151,7 @@ const addtoCard =(btn)=>{
     foodPrice:foodPriceNum,
 };
 card.push(selectedItem);
+console.log(card)
 total = total + foodPriceNum;
 displayCart(card)
 displayTotal(total)
@@ -169,16 +170,32 @@ for(let item of card){
 <img src="${item.foodImg}" alt="" class="w-[50px] h-[50px] rounded-xl object-cover">
     </div>
     <div class="flex-1">
-<h1 class="text-xl font-bold rounded-lg">Roast fennel and aubergine paella</h1>
+<h1 class="text-xl font-bold rounded-lg food-title">${item.foodTitle}</h1>
 <div>
-    <h2 class="text-yellow-600 font-semibold mt-2">$ <span class="price">560</span>BDT</h2>
+    <h2 class="text-yellow-600 font-semibold mt-2"> <span class="item-price">${item.foodPrice}</span>BDT</h2>
     </div>
     </div>
-    <div class="w-6 h-6 bg-red-500 flex items-center justify-center rounded-full absolute -top-1 -right-1">
+    <div onclick ="removeCard(this)"
+    class="w-6 h-6 bg-red-500 flex items-center justify-center rounded-full absolute -top-1 -right-1">
         <i class="fa-solid fa-xmark"></i>
     </div>
 </div>
     `
     cartContainer.append(newCart)
 } 
+}
+const removeCard=(btn)=>{
+    // console.log(btn)
+    const doro = btn.parentNode;
+    // console.log(doro)
+    const foodTitle = doro.querySelector(".food-title").innerText;
+    const foodPrice = Number(doro.querySelector(".item-price").innerText);
+    card = card.filter(item => item.foodTitle != foodTitle);
+
+
+// total = total - foodPrice;
+total = 0;
+card.forEach((item) => (total += item.foodPrice))
+    displayCart(card)
+    displayTotal(total)
 }
