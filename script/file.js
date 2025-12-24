@@ -146,12 +146,13 @@ const addtoCard =(btn)=>{
     // console.log(foodTitle, foodImg, foodPriceNum);
 
     const selectedItem = {
+        id : card.length +1,
     foodTitle:foodTitle,
     foodImg:foodImg,
     foodPrice:foodPriceNum,
 };
 card.push(selectedItem);
-console.log(card)
+// console.log(card)
 total = total + foodPriceNum;
 displayCart(card)
 displayTotal(total)
@@ -167,6 +168,7 @@ for(let item of card){
     newCart.innerHTML =`
     <div class="bg-white rounded-xl flex gap-2 p-1 shadow relative">
     <div class="img">
+    <span class="hidden card-id">${item.id}</span>
 <img src="${item.foodImg}" alt="" class="w-[50px] h-[50px] rounded-xl object-cover">
     </div>
     <div class="flex-1">
